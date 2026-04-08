@@ -1,0 +1,19 @@
+# .github/workflows/ci.yml
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Generate test database
+        run: python generate_data.py --rows 1000
+      - name: Run tests
+        run: pytest tests/ -v --tb=short

@@ -695,6 +695,15 @@ def refresh_data():
 scheduler = BackgroundScheduler()
 scheduler.add_job(refresh_data, 'interval', hours=1)
 scheduler.start()
+# Add to dashboard/app.py — Render needs this
+server = app.server  # expose Flask server
+
+# requirements.txt must include:
+# gunicorn
+# dash
+# plotly
+# pandas
+# etc.
 
 # ── Run ────────────────────────────────────────────────────────────────────────
 if __name__ == '__main__':
